@@ -5,9 +5,9 @@
 
 // dependencies
 const http = require("http");
-const url = require("url");
+const { handleReqRes } = require("./helpers/handleReqRes");
 
-// app object - module scaffholding
+// app object - module scaffolding
 const app = {};
 
 // configuration
@@ -15,32 +15,16 @@ app.config = {
   port: 3000,
 };
 
-//create server
+// create server
 app.createServer = () => {
-  const server = http.createServer(app.hanldeReqReq);
+  const server = http.createServer(app.handleReqRes);
   server.listen(app.config.port, () => {
-    console.log(`listending to port ${app.config.port}`);
+    console.log(`listening to port ${app.config.port}`);
   });
 };
 
-// handle request and response
-app.hanldeReqReq = (req, res) => {
-  // request handling
-  // get the url and parse it
-  const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
-  const trimmedPath = path.replace(/^\/+|\/+$/g, " ");
-  console.log(trimmedPath);
-  const method = req.method.toLowerCase();
-  const queryStringObject = parsedUrl.query;
-
-  const headerObject = req.headers;
-
-  console.log(headerObject);
-
-  //response hanlde
-  res.end("hello bangla");
-};
+// handle Request Response
+app.handleReqRes = handleReqRes;
 
 // start the server
 app.createServer();
